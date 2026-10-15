@@ -301,52 +301,10 @@
         }
       ],
       "total": 21,
-      "estado": "entregado",
+      "estado": "pendiente",
       "direccion": "Av. Test 123",
       "telefono": "987654321",
       "id": 9
-    },
-    {
-      "cliente": "Lucía Quispe",
-      "email": "cliente@cafeandino.pe",
-      "fecha": "2026-10-15T21:17:10.922Z",
-      "items": [
-        {
-          "nombre": "Sándwich de jamón del país",
-          "precio": 9,
-          "cantidad": 1
-        },
-        {
-          "nombre": "Empanada de lomo saltado",
-          "precio": 6,
-          "cantidad": 1
-        },
-        {
-          "nombre": "Cheesecake de aguaymanto",
-          "precio": 13,
-          "cantidad": 1
-        },
-        {
-          "nombre": "Tisana de muña",
-          "precio": 8,
-          "cantidad": 1
-        },
-        {
-          "nombre": "Cappuccino andino",
-          "precio": 12,
-          "cantidad": 1
-        },
-        {
-          "nombre": "Espresso doble",
-          "precio": 9,
-          "cantidad": 1
-        }
-      ],
-      "total": 57,
-      "estado": "entregado",
-      "direccion": "DTERTERT",
-      "telefono": "965987598",
-      "id": 10
     }
   ],
   "usuarios": [

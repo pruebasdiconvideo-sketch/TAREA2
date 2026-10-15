@@ -89,35 +89,3 @@
   </div>
 </section>
 
-<!-- Ejemplos de pipes (sección discreta para cumplir rúbrica) -->
-<section class="container my-5 pipes-demo">
-  <details class="card shadow-sm">
-    <summary class="card-header bg-light py-3 mb-0 cursor-pointer">
-      <strong>Ejemplos de pipes (demostración técnica)</strong>
-    </summary>
-    <div class="card-body">
-      <div class="row row-cols-1 row-cols-md-3 g-3">
-        <div class="col">
-          <small class="text-muted d-block">uppercase / lowercase</small>
-          <code>{{ nombre | uppercase }}</code> · <code>{{ nombre | lowercase }}</code>
-        </div>
-        <div class="col">
-          <small class="text-muted d-block">date</small>
-          <code>{{ fecha | date: 'dd/MM/yyyy' }}</code>
-        </div>
-        <div class="col">
-          <small class="text-muted d-block">currency</small>
-          <code>{{ precio | currency: 'S/': 'symbol' }}</code>
-        </div>
-        <div class="col">
-          <small class="text-muted d-block">percent</small>
-          <code>{{ porcentaje | percent }}</code>
-        </div>
-        <div class="col">
-          <small class="text-muted d-block">number</small>
-          <code>{{ precio | number: '1.2-2' }}</code>
-        </div>
-      </div>
-    </div>
-  </details>
-</section>

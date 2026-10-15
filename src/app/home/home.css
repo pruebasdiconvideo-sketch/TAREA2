@@ -71,24 +71,6 @@
   color: #fff;
 }
 
-/* PIPES DEMO (sección colapsable) */
-.pipes-demo summary {
-  cursor: pointer;
-  list-style: none;
-}
-
-.pipes-demo summary::-webkit-details-marker {
-  display: none;
-}
-
-.pipes-demo code {
-  background: #faf5ef;
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  color: #6f4e37;
-  font-weight: 600;
-}
-
 @media (max-width: 575.98px) {
   .hero {
     padding: 3.5rem 0;
