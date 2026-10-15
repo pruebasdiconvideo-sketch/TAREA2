@@ -95,32 +95,32 @@ Aplicación web e-commerce para una cafetería artesanal de los Andes peruanos, 
 Cada producto cumple con los campos obligatorios: `nombre`, `imagen`, `categoria`, `precio`, `stock`.
 
 ### 8. Consumo de Servicios REST
-- ✅ JSON Server instalado (`json-server@0.17.4`)
-- ✅ Script `npm run api` levanta el servidor en `http://localhost:3000`
-- ✅ `ProductoService` consume la API con `HttpClient`
-- ✅ Productos se muestran dinámicamente en `/productos`
+-  JSON Server instalado (`json-server@0.17.4`)
+-  Script `npm run api` levanta el servidor en `http://localhost:3000`
+-  `ProductoService` consume la API con `HttpClient`
+-  Productos se muestran dinámicamente en `/productos`
 
 ### 9. Página de Productos
-- ✅ Renderizado dinámico desde `db.json`
-- ✅ Muestra: imagen, nombre, categoría, precio, stock
-- ✅ Buscador por nombre (`[(ngModel)]="busqueda"`)
-- ✅ Filtro por categorías (chips con `[ngClass]`)
-- ✅ Ordenamiento por relevancia / precio / nombre
-- ✅ Cards responsive con grid Bootstrap
+-  Renderizado dinámico desde `db.json`
+-  Muestra: imagen, nombre, categoría, precio, stock
+-  Buscador por nombre (`[(ngModel)]="busqueda"`)
+-  Filtro por categorías (chips con `[ngClass]`)
+-  Ordenamiento por relevancia / precio / nombre
+-  Cards responsive con grid Bootstrap
 
 ### 10. Dashboard
-- ✅ Bienvenida al usuario: `Bienvenido, {{ sesion.nombre }}`
-- ✅ Información del usuario logueado (nombre, correo, rol, fecha)
-- ✅ Estadísticas básicas (total productos, stock total, precio promedio, stock bajo)
-- ✅ Tabla de productos con stock bajo
-- ✅ Acceso restringido: si no hay sesión en `localStorage`, redirige a Home
+-  Bienvenida al usuario: `Bienvenido, {{ sesion.nombre }}`
+-  Información del usuario logueado (nombre, correo, rol, fecha)
+-  Estadísticas básicas (total productos, stock total, precio promedio, stock bajo)
+-  Tabla de productos con stock bajo
+-  Acceso restringido: si no hay sesión en `localStorage`, redirige a Home
 
 ### 11. Despliegue
-- ✅ Configurado para Netlify (`netlify.toml`)
-- ✅ SPA redirect habilitado
+-  Configurado para Netlify (`netlify.toml`)
+-  SPA redirect habilitado
 - Link del proyecto desplegado: _(agregar después del primer deploy)_
 
-## 🚀 Instalación y ejecución
+##  Instalación y ejecución
 
 ### Requisitos
 - Node.js 20+ o 22+
@@ -149,7 +149,7 @@ npm run dev
 
 > Cualquier email/contraseña (mínimo 4 caracteres) inicia sesión. Si el email empieza con `admin`, el rol es administrador; en caso contrario, cliente.
 
-## 📦 Despliegue en Netlify
+##  Despliegue en Netlify
 
 1. Subir el repositorio a GitHub
 2. Conectar el repo en https://app.netlify.com
@@ -158,7 +158,7 @@ npm run dev
    - **Publish directory:** `dist/cafe-andino/browser`
 4. Deploy automático en cada push
 
-## 🗂️ Estructura del proyecto
+##  Estructura del proyecto
 
 ```
 cafeandino-pc2/
@@ -194,10 +194,4 @@ cafeandino-pc2/
             └── producto.service.ts  # ProductoService (HTTP GET)
 ```
 
-## 👥 Equipo
 
-_(Agregar nombres del equipo aquí)_
-
-## 📄 Licencia
-
-Proyecto académico para la PC2 de JavaScript Avanzado.
