@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 
 export interface Producto {
   id: number;
@@ -15,20 +13,17 @@ export interface Producto {
 }
 
 /**
- * Servicio que consume la API de productos desde JSON Server.
- * Estilo del profesor: una sola llamada GET directa con HttpClient.
+ * Servicio que devuelve los productos desde datos locales embebidos.
+ * Estilo del profesor: métodos directos, sin dependencia de red para el catálogo.
  *
- * Si JSON Server no responde (ej. en Netlify sin backend), usa los
- * datos embebidos como fallback para que la UI nunca quede vacía.
+ * JSON Server NO se usa para productos (solo para pedidos).
  */
 @Injectable({
   providedIn: 'root',
 })
 export class ProductoService {
-  private apiUrl = 'http://localhost:3000/productos';
-
-  // Datos embebidos como fallback. Son los mismos 12 productos de /db.json.
-  private readonly productosFallback: Producto[] = [
+  // Datos embebidos — los mismos 12 productos de /db.json.
+  private readonly productos: Producto[] = [
     {
       id: 1,
       nombre: 'Cappuccino andino',
@@ -142,16 +137,11 @@ export class ProductoService {
     },
   ];
 
-  constructor(private http: HttpClient) {}
-
   /**
-   * Obtiene los productos desde JSON Server.
-   * Si la petición falla (red, CORS, server caído), usa los datos embebidos.
-   * La UI nunca queda vacía.
+   * Devuelve los productos desde datos locales.
+   * No requiere JSON Server.
    */
   getProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.apiUrl).pipe(
-      catchError(() => of(this.productosFallback)),
-    );
+    return of(this.productos);
   }
 }

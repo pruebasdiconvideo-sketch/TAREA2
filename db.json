@@ -175,7 +175,7 @@
         }
       ],
       "total": 27,
-      "estado": "pendiente",
+      "estado": "preparando",
       "direccion": "Av. El Sol 850, Cusco",
       "telefono": "987654321"
     },
@@ -279,7 +279,7 @@
         }
       ],
       "total": 21,
-      "estado": "entregado",
+      "estado": "pendiente",
       "direccion": "Av. Test 123",
       "telefono": "987654321",
       "id": 8
