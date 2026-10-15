@@ -1,0 +1,43 @@
+.bg-cafe {
+  background-color: #6f4e37 !important;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.brand-logo {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  padding-left: 0.85rem !important;
+  padding-right: 0.85rem !important;
+}
+
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #fff;
+  font-weight: 700;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  border-bottom: 2px solid #d4b996;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .navbar-dark .navbar-nav .nav-link.active {
+    border-bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+}

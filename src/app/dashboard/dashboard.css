@@ -1,0 +1,56 @@
+.titulo-seccion {
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-left: 6px solid #6f4e37;
+  padding-left: 0.85rem;
+  color: #2a1a0f;
+}
+
+.bg-cafe {
+  background-color: #6f4e37 !important;
+}
+
+.text-cafe {
+  color: #6f4e37 !important;
+}
+
+.btn-cafe {
+  background: #6f4e37;
+  border-color: #6f4e37;
+  color: #fff;
+}
+
+.btn-cafe:hover,
+.btn-cafe:focus {
+  background: #2a1a0f;
+  border-color: #2a1a0f;
+  color: #fff;
+}
+
+.btn-outline-cafe {
+  border-color: #6f4e37;
+  color: #6f4e37;
+  background: #fff;
+}
+
+.btn-outline-cafe:hover {
+  background: #6f4e37;
+  color: #fff;
+}
+
+.kpi {
+  border-radius: 14px;
+  transition: transform 0.15s ease;
+}
+
+.kpi:hover {
+  transform: translateY(-2px);
+}
+
+.table > :not(caption) > * > * {
+  border-color: rgba(42, 26, 15, 0.08);
+}
+
+.table-hover > tbody > tr:hover > * {
+  background-color: #faf5ef;
+}

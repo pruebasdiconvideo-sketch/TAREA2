@@ -1,0 +1,170 @@
+<div *ngIf="sesion">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div>
+      <h2 class="titulo-seccion mb-1">Bienvenido, {{ sesion.nombre }}</h2>
+      <p class="text-muted small mb-0">
+        Panel de {{ esAdmin() ? 'administrador' : 'cliente' }}
+      </p>
+    </div>
+    <button class="btn btn-outline-danger btn-sm" (click)="cerrarSesion()">
+      Cerrar sesión
+    </button>
+  </div>
+
+  <!-- Tarjeta de info de usuario -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-cafe text-light">
+      <h5 class="mb-0">Información del usuario</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-1"><strong>Nombre:</strong> {{ sesion.nombre }}</p>
+          <p class="mb-1"><strong>Correo:</strong> {{ sesion.email }}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-1">
+            <strong>Rol:</strong>
+            <span class="badge" [ngClass]="esAdmin() ? 'bg-danger' : 'bg-secondary'">
+              {{ sesion.rol | titlecase }}
+            </span>
+          </p>
+          <p class="mb-1"><strong>Fecha de ingreso:</strong> {{ sesion.fechaIngreso | date: 'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPIs según rol -->
+  <div class="row g-3 mb-4" *ngIf="!cargando">
+    <!-- Admin: KPIs administrativos -->
+    <ng-container *ngIf="esAdmin()">
+      <div class="col-6 col-md-3">
+        <div class="card text-center shadow-sm kpi">
+          <div class="card-body">
+            <h3 class="text-cafe mb-0">{{ totalPedidos }}</h3>
+            <p class="text-muted small mb-0">Pedidos totales</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center shadow-sm kpi">
+          <div class="card-body">
+            <h3 class="text-warning mb-0">{{ pedidosPendientes }}</h3>
+            <p class="text-muted small mb-0">Pendientes</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center shadow-sm kpi">
+          <div class="card-body">
+            <h3 class="text-info mb-0">{{ pedidosEnPreparacion }}</h3>
+            <p class="text-muted small mb-0">En preparación</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card text-center shadow-sm kpi">
+          <div class="card-body">
+            <h3 class="text-success mb-0">{{ ingresos | currency: 'S/': 'symbol' }}</h3>
+            <p class="text-muted small mb-0">Ingresos</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Cliente: KPIs personales -->
+    <ng-container *ngIf="!esAdmin()">
+      <div class="col-6 col-md-4">
+        <div class="card text-center shadow-sm kpi">
+          <div class="card-body">
+            <h3 class="text-cafe mb-0">{{ totalPedidos }}</h3>
+            <p class="text-muted small mb-0">Mis pedidos</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="card text-center shadow-sm kpi">
+          <div class="card-body">
+            <h3 class="text-warning mb-0">{{ pedidosPendientes }}</h3>
+            <p class="text-muted small mb-0">Pendientes</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="card text-center shadow-sm kpi">
+          <div class="card-body">
+            <h3 class="text-success mb-0">{{ totalCompras | currency: 'S/': 'symbol' }}</h3>
+            <p class="text-muted small mb-0">Total comprado</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="text-center py-5" *ngIf="cargando">
+    <div class="spinner-border text-cafe"></div>
+  </div>
+
+  <!-- Accesos rápidos según rol -->
+  <div class="row g-3 mb-4" *ngIf="!cargando">
+    <div class="col-md-6" *ngIf="esAdmin()">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="text-cafe">⚙ Gestión de pedidos</h5>
+          <p class="text-muted small">Administra y cambia el estado de los pedidos de todos los clientes.</p>
+          <a class="btn btn-cafe btn-sm" routerLink="/admin/pedidos">Ir a gestión</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="!esAdmin()">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="text-cafe">🛍 Mis pedidos</h5>
+          <p class="text-muted small">Revisa el estado de tus pedidos realizados.</p>
+          <a class="btn btn-cafe btn-sm" routerLink="/mis-pedidos">Ver mis pedidos</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="text-cafe">☕ Hacer pedido</h5>
+          <p class="text-muted small">Explora el catálogo y arma tu carrito de compras.</p>
+          <a class="btn btn-outline-cafe btn-sm" routerLink="/tienda">Ir a la tienda</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla de últimos pedidos -->
+  <div class="card shadow-sm" *ngIf="!cargando && pedidos.length > 0">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">{{ esAdmin() ? 'Pedidos recientes' : 'Mis pedidos recientes' }}</h5>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th *ngIf="esAdmin()">Cliente</th>
+              <th>Fecha</th>
+              <th>Total</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of pedidos.slice(0, 5)">
+              <td class="fw-bold">#{{ p.id }}</td>
+              <td *ngIf="esAdmin()">{{ p.cliente }}</td>
+              <td class="text-muted small">{{ p.fecha | date: 'dd/MM/yyyy' }}</td>
+              <td class="fw-bold text-cafe">{{ p.total | currency: 'S/': 'symbol' }}</td>
+              <td><span class="badge" [ngClass]="claseEstado(p.estado)">{{ etiquetaEstado(p.estado) }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

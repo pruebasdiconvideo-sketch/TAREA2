@@ -1,0 +1,59 @@
+<h2 class="titulo-seccion mb-4">Nuestros productos</h2>
+
+<div class="row g-2 mb-3">
+  <div class="col-12 col-md-8">
+    <input type="search" class="form-control" placeholder="Buscar producto..."
+           [(ngModel)]="busqueda" aria-label="Buscar producto">
+  </div>
+  <div class="col-12 col-md-4">
+    <select class="form-select" [(ngModel)]="orden" aria-label="Ordenar productos">
+      <option value="relevancia">Ordenar: relevancia</option>
+      <option value="precio-asc">Precio: menor a mayor</option>
+      <option value="precio-desc">Precio: mayor a menor</option>
+      <option value="nombre">Nombre (A-Z)</option>
+    </select>
+  </div>
+</div>
+
+<!-- Filtro por categorías usando [ngClass] para resaltar el activo -->
+<div class="chips mb-3">
+  <button type="button" class="chip" [ngClass]="{ activo: categoria === '' }"
+          (click)="seleccionarCategoria('')">Todos</button>
+  <button type="button" class="chip" *ngFor="let c of categorias"
+          [ngClass]="{ activo: categoria === c }" (click)="seleccionarCategoria(c)">
+    {{ c | titlecase }}
+  </button>
+</div>
+
+<p class="text-muted small" *ngIf="!cargando && !error">{{ filtrados.length }} producto(s)</p>
+
+<div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+<div class="text-center py-5" *ngIf="cargando">
+  <div class="spinner-border text-cafe"></div>
+</div>
+
+<div class="row g-3 g-md-4" *ngIf="!cargando && !error">
+  <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let p of filtrados">
+    <div class="card h-100 shadow-sm">
+      <img [src]="p.imagen" [alt]="p.nombre" class="card-img-top" />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">{{ p.nombre }}</h5>
+        <p class="card-text text-muted small">{{ p.categoria | titlecase }}</p>
+        <!-- [ngStyle] dinámico según stock -->
+        <p class="card-text" [ngStyle]="{ color: p.stock < 5 ? '#dc3545' : '#198754' }">
+          Stock: {{ p.stock }}
+        </p>
+        <p class="card-text fw-bold text-cafe mt-auto">{{ p.precio | currency: 'S/': 'symbol' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="text-muted text-center py-4" *ngIf="!cargando && !error && filtrados.length === 0">
+  No se encontraron productos.
+</p>
+
+<div class="text-center mt-3" *ngIf="!cargando">
+  <button class="btn btn-outline-cafe btn-sm" (click)="limpiarFiltros()">Limpiar filtros</button>
+</div>

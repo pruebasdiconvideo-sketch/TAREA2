@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-cafe sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/">
+      <span class="brand-logo">☕</span>
+      <span>Café Andino</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#menu-principal" aria-controls="menu-principal"
+            aria-expanded="false" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu-principal">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item" *ngFor="let enlace of enlaces">
+          <a class="nav-link" [routerLink]="enlace.ruta" routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: enlace.ruta === '/' }">
+            {{ enlace.texto }}
+          </a>
+        </li>
+
+        <!-- ENLACE SOLO PARA ADMINISTRADORES -->
+        <li class="nav-item" *ngIf="sesion && esAdmin()">
+          <a class="nav-link text-warning fw-semibold" routerLink="/admin/pedidos"
+             routerLinkActive="active">
+            ⚙ Gestión de pedidos
+          </a>
+        </li>
+
+        <!-- ENLACE PARA CLIENTES LOGUEADOS -->
+        <li class="nav-item" *ngIf="sesion && !esAdmin()">
+          <a class="nav-link" routerLink="/mis-pedidos" routerLinkActive="active">
+            Mis pedidos
+          </a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-2 flex-wrap justify-content-center">
+        <ng-container *ngIf="sesion; else invitado">
+          <span class="text-light small d-none d-md-inline">
+            {{ sesion?.nombre }}
+            <span class="badge ms-1" [ngClass]="esAdmin() ? 'bg-danger' : 'bg-light text-dark'">
+              {{ sesion?.rol | titlecase }}
+            </span>
+          </span>
+          <a class="btn btn-light btn-sm" routerLink="/dashboard">Dashboard</a>
+          <button class="btn btn-outline-light btn-sm" (click)="cerrarSesion()">
+            Cerrar sesión
+          </button>
+        </ng-container>
+        <ng-template #invitado>
+          <a class="btn btn-light btn-sm" routerLink="/login">Iniciar sesión</a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>

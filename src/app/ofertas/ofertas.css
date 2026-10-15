@@ -1,0 +1,29 @@
+.titulo-seccion {
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-left: 6px solid #6f4e37;
+  padding-left: 0.85rem;
+  color: #2a1a0f;
+}
+
+.bg-cafe {
+  background-color: #6f4e37 !important;
+}
+
+.text-cafe {
+  color: #6f4e37 !important;
+}
+
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.75rem 1.5rem rgba(42, 26, 15, 0.12) !important;
+}

@@ -1,0 +1,33 @@
+<h2 class="titulo-seccion mb-4">Ofertas especiales</h2>
+
+<div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+<div class="text-center py-5" *ngIf="cargando">
+  <div class="spinner-border text-cafe"></div>
+</div>
+
+<div class="row g-3 g-md-4" *ngIf="!cargando && !error">
+  <div class="col-12 col-sm-6 col-lg-4" *ngFor="let p of ofertas">
+    <div class="card h-100 shadow-sm">
+      <div class="position-relative">
+        <img [src]="p.imagen" [alt]="p.nombre" class="card-img-top" />
+        <span class="badge bg-danger position-absolute top-0 end-0 m-2">
+          -{{ p.descuento }}%
+        </span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ p.nombre }}</h5>
+        <p class="card-text">
+          <span class="text-muted text-decoration-line-through me-2">
+            S/ {{ p.precio.toFixed(2) }}
+          </span>
+          <span class="fw-bold text-cafe">{{ precioFinal(p) | currency: 'S/': 'symbol' }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="text-muted text-center py-4" *ngIf="!cargando && !error && ofertas.length === 0">
+  No hay ofertas disponibles por ahora.
+</p>

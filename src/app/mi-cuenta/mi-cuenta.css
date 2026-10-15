@@ -1,0 +1,21 @@
+.titulo-seccion {
+  font-size: 1.5rem;
+  border-left: 6px solid #6f4e37;
+  padding-left: 0.75rem;
+}
+
+.bg-cafe {
+  background-color: #6f4e37 !important;
+}
+
+.btn-cafe {
+  background: #6f4e37;
+  border-color: #6f4e37;
+  color: #fff;
+}
+
+.btn-cafe:hover {
+  background: #2a1a0f;
+  border-color: #2a1a0f;
+  color: #fff;
+}

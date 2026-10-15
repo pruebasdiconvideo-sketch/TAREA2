@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-header bg-cafe text-light text-center">
+        <h3 class="mb-0">Iniciar sesión</h3>
+      </div>
+      <div class="card-body p-4">
+        <form (ngSubmit)="iniciarSesion()">
+          <div class="mb-3">
+            <label class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" name="email"
+                   [(ngModel)]="email" placeholder="correo@ejemplo.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-control" name="password"
+                   [(ngModel)]="password" placeholder="Ingresa tu contraseña" required>
+          </div>
+
+          <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+          <button type="submit" class="btn btn-cafe w-100" [disabled]="cargando">
+            {{ cargando ? 'Ingresando...' : 'Ingresar' }}
+          </button>
+        </form>
+
+        <hr />
+        <p class="text-muted small mb-0">
+          <strong>Datos de prueba:</strong><br />
+          Cliente: cliente@cafeandino.pe / 1234<br />
+          Admin: admin@cafeandino.pe / 1234
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

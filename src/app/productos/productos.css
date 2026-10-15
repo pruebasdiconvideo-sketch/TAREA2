@@ -1,0 +1,69 @@
+.titulo-seccion {
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-left: 6px solid #6f4e37;
+  padding-left: 0.85rem;
+  color: #2a1a0f;
+}
+
+.text-cafe {
+  color: #6f4e37 !important;
+}
+
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Chips de filtro */
+.chips {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+
+.chip {
+  border: 1px solid #d4b996;
+  background: #fff;
+  color: #6f4e37;
+  border-radius: 999px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-weight: 500;
+}
+
+.chip:hover {
+  background: #faf5ef;
+}
+
+.chip.activo {
+  background: #6f4e37;
+  border-color: #6f4e37;
+  color: #fff;
+}
+
+.btn-outline-cafe {
+  border-color: #6f4e37;
+  color: #6f4e37;
+  background: #fff;
+}
+
+.btn-outline-cafe:hover {
+  background: #6f4e37;
+  color: #fff;
+}
+
+/* Card de producto hover */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.75rem 1.5rem rgba(42, 26, 15, 0.12) !important;
+}

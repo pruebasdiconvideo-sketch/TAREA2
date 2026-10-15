@@ -1,0 +1,15 @@
+.text-cafe {
+  color: #6f4e37;
+}
+
+.btn-cafe {
+  background: #6f4e37;
+  border-color: #6f4e37;
+  color: #fff;
+}
+
+.btn-cafe:hover {
+  background: #2a1a0f;
+  border-color: #2a1a0f;
+  color: #fff;
+}

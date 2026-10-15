@@ -1,0 +1,111 @@
+<h2 class="titulo-seccion mb-4">Tienda</h2>
+
+<div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+<div class="text-center py-5" *ngIf="cargando">
+  <div class="spinner-border text-cafe"></div>
+</div>
+
+<!-- MENSAJE DE CONFIRMACIÓN (reemplaza toda la tienda cuando se confirma) -->
+<div class="card shadow-sm" *ngIf="pedidoConfirmado; else vistaTienda">
+  <div class="card-body text-center p-5">
+    <div class="text-success mb-3" style="font-size: 4rem;">✓</div>
+    <h3 class="text-cafe">¡Pedido confirmado!</h3>
+    <p class="text-muted">Tu pedido fue registrado con estado <strong>Pendiente</strong>.
+    Te avisaremos cuando comience la preparación.</p>
+    <button class="btn btn-cafe mt-2" (click)="cerrarConfirmacion()">Ver mis pedidos</button>
+  </div>
+</div>
+
+<ng-template #vistaTienda>
+<div class="row" *ngIf="!cargando && !error">
+  <!-- Listado de productos -->
+  <div class="col-lg-8">
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-md-4" *ngFor="let p of productos">
+        <div class="card h-100 shadow-sm">
+          <img [src]="p.imagen" [alt]="p.nombre" class="card-img-top" />
+          <div class="card-body">
+            <h6 class="card-title">{{ p.nombre }}</h6>
+            <p class="text-muted small mb-1">{{ p.categoria | titlecase }}</p>
+            <p class="fw-bold text-cafe mb-2">{{ p.precio | currency: 'S/': 'symbol' }}</p>
+            <button class="btn btn-cafe btn-sm w-100"
+                    [disabled]="p.stock === 0" (click)="agregar(p)">
+              {{ p.stock === 0 ? 'Agotado' : 'Agregar' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrito lateral con checkout integrado -->
+  <div class="col-lg-4 mt-3 mt-lg-0">
+    <div class="card shadow-sm position-sticky" style="top: 90px;">
+      <div class="card-header bg-cafe text-light d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-cart3"></i> Carrito ({{ cantidadTotal }})</span>
+        <button class="btn btn-sm btn-outline-light" *ngIf="carrito.length > 0" (click)="vaciar()">
+          Vaciar
+        </button>
+      </div>
+      <div class="card-body">
+        <p class="text-muted text-center" *ngIf="carrito.length === 0">
+          Tu carrito está vacío.
+        </p>
+
+        <ul class="list-group list-group-flush" *ngIf="carrito.length > 0">
+          <li class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let i of carrito">
+            <div>
+              <div class="fw-semibold small">{{ i.producto.nombre }}</div>
+              <div class="d-flex align-items-center gap-2 mt-1">
+                <button class="btn btn-sm btn-outline-secondary" (click)="cambiarCantidad(i, -1)">-</button>
+                <span>{{ i.cantidad }}</span>
+                <button class="btn btn-sm btn-outline-secondary" (click)="cambiarCantidad(i, 1)">+</button>
+              </div>
+            </div>
+            <div class="text-end">
+              <div class="fw-bold text-cafe">
+                {{ (i.producto.precio * i.cantidad) | currency: 'S/': 'symbol' }}
+              </div>
+              <button class="btn btn-sm btn-link text-danger p-0" (click)="quitar(i)">
+                <small>Quitar</small>
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <hr *ngIf="carrito.length > 0" />
+        <div class="d-flex justify-content-between fw-bold" *ngIf="carrito.length > 0">
+          <span>Total:</span>
+          <span class="text-cafe">{{ total | currency: 'S/': 'symbol' }}</span>
+        </div>
+
+        <!-- Formulario de checkout (visible solo si hay items) -->
+        <div *ngIf="carrito.length > 0" class="mt-3">
+          <div class="mb-2">
+            <label class="form-label small fw-semibold">Dirección de entrega</label>
+            <input type="text" class="form-control form-control-sm" name="direccion"
+                   [(ngModel)]="direccion" placeholder="Av. Los Andes 123, Cusco">
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-semibold">Teléfono de contacto</label>
+            <input type="tel" class="form-control form-control-sm" name="telefono"
+                   [(ngModel)]="telefono" placeholder="987 654 321">
+          </div>
+
+          <button class="btn btn-cafe w-100"
+                  [disabled]="!puedeConfirmar || procesando"
+                  (click)="confirmarPedido()">
+            {{ procesando ? 'Procesando...' : 'Confirmar pedido' }}
+          </button>
+
+          <p class="text-muted small mt-2 mb-0" *ngIf="!puedeConfirmar">
+            Completa dirección y teléfono para confirmar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-template>

@@ -1,0 +1,189 @@
+<div class="admin-pedidos">
+  <!-- Acceso denegado -->
+  <div class="alert alert-danger text-center" *ngIf="accesoDenegado">
+    <h4 class="alert-heading">⛔ Acceso denegado</h4>
+    <p class="mb-0">Esta sección está disponible solo para administradores.</p>
+    <p class="small text-muted mt-2 mb-0">Serás redirigido a tu dashboard en 2 segundos...</p>
+  </div>
+
+  <ng-container *ngIf="!accesoDenegado">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div>
+      <h2 class="titulo-seccion mb-1">Gestión de pedidos</h2>
+      <p class="text-muted small mb-0">Panel administrativo — solo visible para administradores.</p>
+    </div>
+    <button class="btn btn-outline-cafe btn-sm" (click)="cargarPedidos()" [disabled]="cargando">
+      ↻ Actualizar
+    </button>
+  </div>
+
+  <!-- KPIs por estado -->
+  <div class="row g-3 mb-4" *ngIf="!cargando && !error">
+    <div class="col-6 col-md-3">
+      <div class="card kpi-card border-warning">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small">Pendientes</div>
+              <div class="h3 mb-0 text-warning">{{ totalesPorEstado.pendiente }}</div>
+            </div>
+            <i class="bi bi-clock fs-3 text-warning"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card kpi-card border-info">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small">En preparación</div>
+              <div class="h3 mb-0 text-info">{{ totalesPorEstado.preparando }}</div>
+            </div>
+            <i class="bi bi-cup-hot fs-3 text-info"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card kpi-card border-success">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small">Entregados</div>
+              <div class="h3 mb-0 text-success">{{ totalesPorEstado.entregado }}</div>
+            </div>
+            <i class="bi bi-check-circle fs-3 text-success"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card kpi-card border-secondary">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="text-muted small">Ingresos (entregados)</div>
+              <div class="h5 mb-0 text-cafe">{{ ingresosTotales | currency: 'S/': 'symbol' }}</div>
+            </div>
+            <i class="bi bi-cash-coin fs-3 text-cafe"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="row g-2 mb-3" *ngIf="!cargando && !error">
+    <div class="col-12 col-md-6">
+      <input type="search" class="form-control" placeholder="Buscar por cliente, email o #pedido..."
+             [(ngModel)]="busqueda" aria-label="Buscar pedidos">
+    </div>
+    <div class="col-12 col-md-6">
+      <select class="form-select" [(ngModel)]="filtroEstado" aria-label="Filtrar por estado">
+        <option value="todos">Todos los estados</option>
+        <option *ngFor="let e of estados" [value]="e.valor">{{ e.etiqueta }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Estado de carga -->
+  <div class="text-center py-5" *ngIf="cargando">
+    <div class="spinner-border text-cafe"></div>
+    <p class="text-muted mt-2">Cargando pedidos...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+  <!-- Tabla de pedidos -->
+  <div class="card shadow-sm" *ngIf="!cargando && !error && pedidosFiltrados.length > 0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Cliente</th>
+            <th class="d-none d-md-table-cell">Fecha</th>
+            <th class="d-none d-lg-table-cell">Items</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th class="text-end">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pedidosFiltrados">
+            <td class="fw-bold">#{{ p.id }}</td>
+            <td>
+              <div class="fw-semibold">{{ p.cliente }}</div>
+              <div class="text-muted small">{{ p.email }}</div>
+            </td>
+            <td class="d-none d-md-table-cell text-muted small">{{ p.fecha | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td class="d-none d-lg-table-cell">
+              <span class="badge bg-light text-dark">{{ p.items.length }} items</span>
+            </td>
+            <td class="fw-bold text-cafe">{{ p.total | currency: 'S/': 'symbol' }}</td>
+            <td>
+              <span class="badge" [ngClass]="claseEstado(p.estado)">{{ etiquetaEstado(p.estado) }}</span>
+            </td>
+            <td class="text-end">
+              <button class="btn btn-sm btn-outline-cafe me-1" (click)="toggleExpandir(p.id)"
+                      [attr.aria-expanded]="pedidoExpandido === p.id">
+                {{ pedidoExpandido === p.id ? 'Ocultar' : 'Ver' }}
+              </button>
+            </td>
+          </tr>
+          <!-- Fila expandible con detalle del pedido -->
+          <tr *ngIf="false"></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Detalle del pedido seleccionado -->
+    <div class="card border-0 border-top" *ngIf="pedidoExpandido">
+      <div class="card-body" *ngFor="let p of pedidosFiltrados">
+        <ng-container *ngIf="p.id === pedidoExpandido">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <h6 class="text-cafe fw-bold">Detalle del pedido #{{ p.id }}</h6>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between" *ngFor="let item of p.items">
+                  <span>{{ item.cantidad }} × {{ item.nombre }}</span>
+                  <span class="fw-semibold">{{ (item.precio * item.cantidad) | currency: 'S/': 'symbol' }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between fw-bold text-cafe">
+                  <span>Total</span>
+                  <span>{{ p.total | currency: 'S/': 'symbol' }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h6 class="text-cafe fw-bold">Datos de entrega</h6>
+              <p class="mb-1"><i class="bi bi-person"></i> {{ p.cliente }}</p>
+              <p class="mb-1"><i class="bi bi-envelope"></i> {{ p.email }}</p>
+              <p class="mb-1"><i class="bi bi-telephone"></i> {{ p.telefono }}</p>
+              <p class="mb-3"><i class="bi bi-geo-alt"></i> {{ p.direccion }}</p>
+
+              <h6 class="text-cafe fw-bold mt-3">Cambiar estado</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <button *ngFor="let e of estados"
+                        class="btn btn-sm"
+                        [ngClass]="p.estado === e.valor ? 'btn-cafe' : 'btn-outline-cafe'"
+                        [disabled]="p.estado === e.valor"
+                        (click)="cambiarEstado(p, e.valor)">
+                  {{ e.etiqueta }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sin resultados -->
+  <div class="alert alert-info text-center" *ngIf="!cargando && !error && pedidosFiltrados.length === 0">
+    No hay pedidos que coincidan con el filtro.
+  </div>
+  </ng-container>
+</div>

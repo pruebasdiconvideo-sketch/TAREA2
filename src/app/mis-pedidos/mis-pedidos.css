@@ -1,0 +1,48 @@
+.titulo-seccion {
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-left: 6px solid #6f4e37;
+  padding-left: 0.85rem;
+  color: #2a1a0f;
+}
+
+.text-cafe {
+  color: #6f4e37 !important;
+}
+
+.bg-cafe {
+  background-color: #6f4e37 !important;
+}
+
+.btn-cafe {
+  background: #6f4e37;
+  border-color: #6f4e37;
+  color: #fff;
+}
+
+.btn-cafe:hover,
+.btn-cafe:focus {
+  background: #2a1a0f;
+  border-color: #2a1a0f;
+  color: #fff;
+}
+
+.btn-outline-cafe {
+  border-color: #6f4e37;
+  color: #6f4e37;
+  background: #fff;
+}
+
+.btn-outline-cafe:hover {
+  background: #6f4e37;
+  color: #fff;
+}
+
+.card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(42, 26, 15, 0.1) !important;
+}

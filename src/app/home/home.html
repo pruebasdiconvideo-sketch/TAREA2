@@ -1,0 +1,123 @@
+<!-- HERO -->
+<section class="hero text-center text-light">
+  <div class="container py-5">
+    <p class="text-uppercase letter-spaced mb-2">Cafetería artesanal</p>
+    <h1 class="display-3 fw-bold mb-3">Café Andino</h1>
+    <p class="lead mb-4 mx-auto" style="max-width: 600px;">
+      Sabores de los Andes peruanos. Café de altura, tisanas tradicionales y postres hechos con amor.
+    </p>
+    <div class="d-flex justify-content-center gap-2 flex-wrap">
+      <a class="btn btn-light btn-lg" routerLink="/productos">Ver productos</a>
+      <a class="btn btn-outline-light btn-lg" routerLink="/ofertas">Ver ofertas</a>
+    </div>
+  </div>
+</section>
+
+<!-- DESTACADOS -->
+<section class="container my-5">
+  <div class="d-flex justify-content-between align-items-end mb-4">
+    <h2 class="titulo-seccion mb-0">Productos destacados</h2>
+    <a class="btn btn-link text-cafe text-decoration-none p-0" routerLink="/productos">
+      Ver todos →
+    </a>
+  </div>
+
+  <div class="text-center py-5" *ngIf="cargando">
+    <div class="spinner-border text-cafe"></div>
+  </div>
+
+  <div class="row g-3 g-md-4" *ngIf="!cargando">
+    <div class="col-12 col-sm-6 col-lg-3" *ngFor="let p of destacados">
+      <div class="card h-100 shadow-sm product-card">
+        <div class="product-img-wrap">
+          <img [src]="p.imagen" [alt]="p.nombre" class="card-img-top" />
+        </div>
+        <div class="card-body d-flex flex-column">
+          <span class="badge bg-cafe align-self-start mb-2">{{ p.categoria | titlecase }}</span>
+          <h5 class="card-title">{{ p.nombre }}</h5>
+          <p class="card-text fw-bold text-cafe mt-auto mb-0 fs-5">
+            {{ p.precio | currency: 'S/': 'symbol' }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info text-center mt-4" *ngIf="!cargando && destacados.length === 0">
+    No se pudieron cargar los productos. Asegúrate de ejecutar
+    <code>npx json-server --watch db.json --port 3000</code>.
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="bg-light py-5">
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="display-6 text-cafe">☕</div>
+        <h3 class="h5">Café de altura</h3>
+        <p class="text-muted small mb-0">Granos seleccionados de Quillabamba y los Andes peruanos.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="display-6 text-cafe">🚚</div>
+        <h3 class="h5">Envío rápido</h3>
+        <p class="text-muted small mb-0">Entregamos en toda la ciudad en menos de 45 minutos.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="display-6 text-cafe">🌿</div>
+        <h3 class="h5">100% natural</h3>
+        <p class="text-muted small mb-0">Sin conservantes ni aditivos artificiales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="container my-5">
+  <div class="row align-items-center g-4">
+    <div class="col-md-6">
+      <h2 class="titulo-seccion mb-3">¿Listo para probar nuestros sabores?</h2>
+      <p class="text-muted">Visita nuestra tienda online, arma tu pedido y recíbelo en casa. También puedes visitarnos en físico en nuestro local de Cusco.</p>
+      <a class="btn btn-cafe" routerLink="/tienda">Ir a la tienda</a>
+    </div>
+    <div class="col-md-6">
+      <img
+        src="https://images.unsplash.com/photo-1554118811-83e596442b39?w=600&q=80"
+        alt="Cafetería Café Andino"
+        class="img-fluid rounded shadow-sm w-100" />
+    </div>
+  </div>
+</section>
+
+<!-- Ejemplos de pipes (sección discreta para cumplir rúbrica) -->
+<section class="container my-5 pipes-demo">
+  <details class="card shadow-sm">
+    <summary class="card-header bg-light py-3 mb-0 cursor-pointer">
+      <strong>Ejemplos de pipes (demostración técnica)</strong>
+    </summary>
+    <div class="card-body">
+      <div class="row row-cols-1 row-cols-md-3 g-3">
+        <div class="col">
+          <small class="text-muted d-block">uppercase / lowercase</small>
+          <code>{{ nombre | uppercase }}</code> · <code>{{ nombre | lowercase }}</code>
+        </div>
+        <div class="col">
+          <small class="text-muted d-block">date</small>
+          <code>{{ fecha | date: 'dd/MM/yyyy' }}</code>
+        </div>
+        <div class="col">
+          <small class="text-muted d-block">currency</small>
+          <code>{{ precio | currency: 'S/': 'symbol' }}</code>
+        </div>
+        <div class="col">
+          <small class="text-muted d-block">percent</small>
+          <code>{{ porcentaje | percent }}</code>
+        </div>
+        <div class="col">
+          <small class="text-muted d-block">number</small>
+          <code>{{ precio | number: '1.2-2' }}</code>
+        </div>
+      </div>
+    </div>
+  </details>
+</section>

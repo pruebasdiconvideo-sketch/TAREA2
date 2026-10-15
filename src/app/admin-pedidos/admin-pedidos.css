@@ -1,0 +1,86 @@
+.admin-pedidos {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.titulo-seccion {
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-left: 6px solid #6f4e37;
+  padding-left: 0.85rem;
+  color: #2a1a0f;
+}
+
+.text-cafe {
+  color: #6f4e37 !important;
+}
+
+.bg-cafe {
+  background-color: #6f4e37 !important;
+}
+
+.btn-cafe {
+  background: #6f4e37;
+  border-color: #6f4e37;
+  color: #fff;
+}
+
+.btn-cafe:hover,
+.btn-cafe:focus {
+  background: #2a1a0f;
+  border-color: #2a1a0f;
+  color: #fff;
+}
+
+.btn-cafe:disabled {
+  background: #b9a99a;
+  border-color: #b9a99a;
+}
+
+.btn-outline-cafe {
+  border-color: #6f4e37;
+  color: #6f4e37;
+  background: #fff;
+}
+
+.btn-outline-cafe:hover {
+  background: #6f4e37;
+  color: #fff;
+}
+
+.btn-outline-cafe:disabled {
+  opacity: 0.5;
+}
+
+.kpi-card {
+  border-left: 4px solid;
+  border-radius: 10px;
+  transition: transform 0.15s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+}
+
+.border-warning { border-left-color: #ffc107 !important; }
+.border-info    { border-left-color: #0dcaf0 !important; }
+.border-success { border-left-color: #198754 !important; }
+.border-secondary { border-left-color: #6c757d !important; }
+
+.table > :not(caption) > * > * {
+  border-color: rgba(42, 26, 15, 0.08);
+}
+
+.table-hover > tbody > tr:hover > * {
+  background-color: #faf5ef;
+}
+
+/* Bootstrap Icons via emoji fallback si no están cargados */
+.bi::before {
+  display: inline-block;
+  margin-right: 0.3em;
+}

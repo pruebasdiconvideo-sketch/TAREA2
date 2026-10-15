@@ -1,0 +1,25 @@
+<h2 class="titulo-seccion mb-4">Mi Cuenta</h2>
+
+<div class="card shadow-sm" *ngIf="sesion; else invitado">
+  <div class="card-header bg-cafe text-light">
+    <h5 class="mb-0">Datos de tu sesión</h5>
+  </div>
+  <div class="card-body">
+    <p><strong>Nombre:</strong> {{ sesion.nombre }}</p>
+    <p><strong>Correo:</strong> {{ sesion.email }}</p>
+    <p><strong>Rol:</strong> {{ sesion.rol | titlecase }}</p>
+    <p><strong>Fecha de ingreso:</strong> {{ sesion.fechaIngreso | date: 'dd/MM/yyyy HH:mm' }}</p>
+
+    <div class="d-flex gap-2 mt-3">
+      <button class="btn btn-cafe" (click)="irAlDashboard()">Ir al Dashboard</button>
+      <button class="btn btn-outline-danger" (click)="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #invitado>
+  <div class="alert alert-info">
+    No has iniciado sesión.
+    <a routerLink="/login" class="alert-link">Inicia sesión aquí</a>
+  </div>
+</ng-template>

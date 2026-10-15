@@ -1,0 +1,45 @@
+<h2 class="titulo-seccion mb-4">Contáctanos</h2>
+
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Información de contacto</h5>
+        <p class="mb-1"><strong>Dirección:</strong> Av. Los Andes 123, Cusco</p>
+        <p class="mb-1"><strong>Teléfono:</strong> +51 987 654 321</p>
+        <p class="mb-1"><strong>Correo:</strong> contacto@cafeandino.pe</p>
+        <p class="mb-0"><strong>Horario:</strong> Lun-Sáb 8am - 9pm</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Envíanos un mensaje</h5>
+        <form (ngSubmit)="enviar()">
+          <div class="mb-3">
+            <label class="form-label">Nombre completo</label>
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="nombre"
+                   placeholder="Tu nombre" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" name="email" [(ngModel)]="email"
+                   placeholder="tucorreo@ejemplo.com" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Mensaje</label>
+            <textarea class="form-control" name="mensaje" [(ngModel)]="mensaje" rows="4"
+                      placeholder="Escribe tu mensaje..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-cafe">Enviar mensaje</button>
+        </form>
+
+        <div class="alert alert-success mt-3" *ngIf="enviado">
+          ¡Gracias! Tu mensaje fue enviado correctamente.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
