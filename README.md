@@ -1,6 +1,5 @@
 # Café Andino
-Aplicación web e-commerce para una cafetería artesanal de los Andes peruanos, desarrollada con Angular + Bootstrap + JSON Server. Cumple con todos los requisitos de la rúbrica PC2.
-
+Aplicación web e-commerce para una cafetería artesanal de los Andes peruanos, desarrollada con Angular + Bootstrap + JSON Server
  ## Tecnologías usadas
 
 - **Angular 22** (standalone components, sin signals, con `constructor(private ...)`)
@@ -126,22 +125,7 @@ Cada producto cumple con los campos obligatorios: `nombre`, `imagen`, `categoria
 - Node.js 20+ o 22+
 - npm 11+
 
-### Pasos
-```bash
-# 1. Instalar dependencias
-npm install
 
-# 2. Levantar la API (JSON Server) en http://localhost:3000
-npm run api
-
-# 3. En otra terminal, levantar Angular en http://localhost:4200
-npm start
-```
-
-O ejecutar ambos a la vez:
-```bash
-npm run dev
-```
 
 ### Datos de prueba para login
 - **Cliente:** `cliente@cafeandino.pe` / `1234`
