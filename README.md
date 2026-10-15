@@ -1,8 +1,7 @@
-# Café Andino — PC2 JavaScript Avanzado
-
+# Café Andino
 Aplicación web e-commerce para una cafetería artesanal de los Andes peruanos, desarrollada con Angular + Bootstrap + JSON Server. Cumple con todos los requisitos de la rúbrica PC2.
 
-## 📋 Tecnologías usadas
+ ## Tecnologías usadas
 
 - **Angular 22** (standalone components, sin signals, con `constructor(private ...)`)
 - **Bootstrap 5.3** (grid responsive, cards, navbar, formularios, botones, tablas)
@@ -10,12 +9,12 @@ Aplicación web e-commerce para una cafetería artesanal de los Andes peruanos, 
 - **TypeScript 6**
 - **HTML5 + CSS3**
 
-## 🎯 Funcionalidades implementadas (rúbrica)
+##  Funcionalidades implementadas (rúbrica)
 
 ### 1. Estructura general
-- ✅ Navbar reutilizable (`navbar/`)
-- ✅ Footer reutilizable (`footer/`)
-- ✅ Arquitectura basada en componentes (9 componentes standalone)
+-  Navbar reutilizable (`navbar/`)
+-  Footer reutilizable (`footer/`)
+-  Arquitectura basada en componentes (9 componentes standalone)
 
 ### 2. Páginas mínimas
 | Página | Ruta | Componente |
@@ -31,50 +30,50 @@ Aplicación web e-commerce para una cafetería artesanal de los Andes peruanos, 
 | 404 | `**` | `NotFound` |
 
 ### 3. Navegación y Routing
-- ✅ Angular Routing con `routerLink` y `routerLinkActive`
-- ✅ Navegación entre todas las páginas
-- ✅ Página 404 personalizada para rutas inexistentes
-- ✅ Redirección automática al Home si se intenta ingresar a `/dashboard` sin sesión (check manual en `Dashboard.ngOnInit`)
+-  Angular Routing con `routerLink` y `routerLinkActive`
+-  Navegación entre todas las páginas
+-  Página 404 personalizada para rutas inexistentes
+-  Redirección automática al Home si se intenta ingresar a `/dashboard` sin sesión (check manual en `Dashboard.ngOnInit`)
 
 ### 4. Simulación de Login
-- ✅ Formulario con `[(ngModel)]` para email y password
-- ✅ Validaciones básicas (campos obligatorios, mínimo 4 caracteres en password)
-- ✅ Persistencia en `localStorage` (clave `cafe_andino_sesion`)
-- ✅ Opción de cerrar sesión en navbar, dashboard y mi-cuenta
+-  Formulario con `[(ngModel)]` para email y password
+-  Validaciones básicas (campos obligatorios, mínimo 4 caracteres en password)
+-  Persistencia en `localStorage` (clave `cafe_andino_sesion`)
+-  Opción de cerrar sesión en navbar, dashboard y mi-cuenta
 
 ### 5. Uso obligatorio de Angular
 
 **Data Binding:**
-- ✅ Interpolación `{{ }}` — ej. `{{ p.nombre }}`, `{{ p.precio | currency }}`
-- ✅ Property Binding `[ ]` — ej. `[src]="p.imagen"`, `[disabled]="p.stock === 0"`
-- ✅ Event Binding `( )` — ej. `(click)="agregar(p)"`, `(ngSubmit)="iniciarSesion()"`
-- ✅ Two-Way Data Binding `[(ngModel)]` — ej. login, contacto, buscador
+-  Interpolación `{{ }}` — ej. `{{ p.nombre }}`, `{{ p.precio | currency }}`
+-  Property Binding `[ ]` — ej. `[src]="p.imagen"`, `[disabled]="p.stock === 0"`
+-  Event Binding `( )` — ej. `(click)="agregar(p)"`, `(ngSubmit)="iniciarSesion()"`
+-  Two-Way Data Binding `[(ngModel)]` — ej. login, contacto, buscador
 
 **Directivas estructurales:**
-- ✅ `*ngFor` — listado de productos, enlaces navbar, items carrito, etc.
-- ✅ `*ngIf` — condicionales en cards, carrito vacío, sesión, errores
+- `*ngFor` — listado de productos, enlaces navbar, items carrito, etc.
+-  `*ngIf` — condicionales en cards, carrito vacío, sesión, errores
 
 **Directivas de atributos:**
-- ✅ `[ngClass]` — chips activas, badges por rol, alertas
-- ✅ `[ngStyle]` — color dinámico según stock en `productos.html`
+-  `[ngClass]` — chips activas, badges por rol, alertas
+-  `[ngStyle]` — color dinámico según stock en `productos.html`
 
 **Pipes (6, supera el mínimo de 2):**
-- ✅ `CurrencyPipe` — precios en S/
-- ✅ `DatePipe` — fechas con formato `dd/MM/yyyy`
-- ✅ `UpperCasePipe` — títulos en home
-- ✅ `LowerCasePipe` — ejemplos en home
-- ✅ `TitleCasePipe` — categorías
-- ✅ `PercentPipe` — IGV referencial
-- ✅ `DecimalPipe` — formato numérico
+-  `CurrencyPipe` — precios en S/
+-  `DatePipe` — fechas con formato `dd/MM/yyyy`
+-  `UpperCasePipe` — títulos en home
+-  `LowerCasePipe` — ejemplos en home
+-  `TitleCasePipe` — categorías
+-  `PercentPipe` — IGV referencial
+-  `DecimalPipe` — formato numérico
 
 ### 6. Bootstrap
-- ✅ Grid responsive (`row`, `col-12 col-sm-6 col-lg-4`)
-- ✅ Cards (productos, dashboard, mi-cuenta, contacto)
-- ✅ Navbar con `navbar-expand-lg`
-- ✅ Formularios (`form-control`, `form-label`, `form-select`)
-- ✅ Botones (`btn btn-cafe`, `btn-outline-light`)
-- ✅ Tablas (`table table-striped`) en dashboard
-- ✅ Responsive para desktop y mobile
+-  Grid responsive (`row`, `col-12 col-sm-6 col-lg-4`)
+-  Cards (productos, dashboard, mi-cuenta, contacto)
+-  Navbar con `navbar-expand-lg`
+-  Formularios (`form-control`, `form-label`, `form-select`)
+-  Botones (`btn btn-cafe`, `btn-outline-light`)
+-  Tablas (`table table-striped`) en dashboard
+-  Responsive para desktop y mobile
 
 ### 7. Base de datos simulada (db.json)
 ```json
