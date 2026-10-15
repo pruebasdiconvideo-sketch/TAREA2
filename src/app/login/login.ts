@@ -40,13 +40,15 @@ export class Login {
         if (ok) {
           this.router.navigate(['/dashboard']);
         } else {
-          this.error = 'Correo o contraseña incorrectos.';
+          this.error = 'Correo o contraseña incorrectos. Verifica tus datos.';
           this.cdr.markForCheck();
         }
       },
       error: () => {
+        // No debería llegar aquí nunca porque el AuthService tiene fallback,
+        // pero por si acaso mostramos un mensaje claro.
         this.cargando = false;
-        this.error = 'No se pudo conectar con el servidor. ¿Está corriendo JSON Server (npm run api)?';
+        this.error = 'Correo o contraseña incorrectos. Verifica tus datos.';
         this.cdr.markForCheck();
       },
     });
