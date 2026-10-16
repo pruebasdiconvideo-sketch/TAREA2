@@ -20,7 +20,6 @@
           </a>
         </li>
 
-        <!-- ENLACE SOLO PARA ADMINISTRADORES -->
         <li class="nav-item" *ngIf="sesion && esAdmin()">
           <a class="nav-link text-warning fw-semibold" routerLink="/admin/pedidos"
              routerLinkActive="active">
@@ -28,7 +27,6 @@
           </a>
         </li>
 
-        <!-- ENLACE PARA CLIENTES LOGUEADOS -->
         <li class="nav-item" *ngIf="sesion && !esAdmin()">
           <a class="nav-link" routerLink="/mis-pedidos" routerLinkActive="active">
             Mis pedidos

@@ -28,10 +28,6 @@ export class Registro {
     return this.confirmar !== '' && this.password !== this.confirmar;
   }
 
-  /**
-   * Registra un nuevo cliente. Si el email ya existe, muestra error.
-   * Si todo está bien, crea la cuenta, inicia sesión y redirige al dashboard.
-   */
   registrar(form: NgForm): void {
     this.error = '';
     if (form.invalid) {

@@ -29,7 +29,7 @@ export class Productos implements OnInit {
         this.cdr.markForCheck();
       },
       error: () => {
-        this.error = 'No se pudo cargar el catálogo. ¿Está corriendo JSON Server (npm run api)?';
+        this.error = 'No se pudo cargar el catálogo.';
         this.cargando = false;
         this.cdr.markForCheck();
       },

@@ -15,7 +15,6 @@
   </div>
 </div>
 
-<!-- Filtro por categorías usando [ngClass] para resaltar el activo -->
 <div class="chips mb-3">
   <button type="button" class="chip" [ngClass]="{ activo: categoria === '' }"
           (click)="seleccionarCategoria('')">Todos</button>
@@ -40,7 +39,6 @@
       <div class="card-body d-flex flex-column">
         <h5 class="card-title">{{ p.nombre }}</h5>
         <p class="card-text text-muted small">{{ p.categoria | titlecase }}</p>
-        <!-- [ngStyle] dinámico según stock -->
         <p class="card-text" [ngStyle]="{ color: p.stock < 5 ? '#dc3545' : '#198754' }">
           Stock: {{ p.stock }}
         </p>

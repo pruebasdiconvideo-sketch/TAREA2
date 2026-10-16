@@ -38,7 +38,6 @@ export class AdminPedidos implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Verificación de rol: si no es administrador, redirigir al home
     if (!this.auth.estaAutenticado()) {
       this.router.navigate(['/login']);
       return;
@@ -47,7 +46,6 @@ export class AdminPedidos implements OnInit {
       this.accesoDenegado = true;
       this.cargando = false;
       this.cdr.markForCheck();
-      // Redirigir tras 2 segundos
       setTimeout(() => this.router.navigate(['/dashboard']), 2000);
       return;
     }
@@ -58,13 +56,12 @@ export class AdminPedidos implements OnInit {
     this.cargando = true;
     this.pedidoService.getPedidos().subscribe({
       next: (data) => {
-        // Ordenar por fecha descendente (más reciente primero)
         this.pedidos = data.sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
         this.cargando = false;
         this.cdr.markForCheck();
       },
       error: () => {
-        this.error = 'No se pudieron cargar los pedidos. ¿Está corriendo JSON Server?';
+        this.error = 'No se pudieron cargar los pedidos.';
         this.cargando = false;
         this.cdr.markForCheck();
       },

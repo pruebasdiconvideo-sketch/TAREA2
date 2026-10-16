@@ -23,7 +23,6 @@ export class Tienda implements OnInit {
   cargando = true;
   error = '';
 
-  // Checkout (formulario visible al final del carrito)
   direccion = '';
   telefono = '';
   procesando = false;
@@ -48,7 +47,7 @@ export class Tienda implements OnInit {
         this.cdr.markForCheck();
       },
       error: () => {
-        this.error = 'No se pudo cargar la tienda. ¿Está corriendo JSON Server?';
+        this.error = 'No se pudo cargar la tienda.';
         this.cargando = false;
         this.cdr.markForCheck();
       },
@@ -93,10 +92,6 @@ export class Tienda implements OnInit {
     this.carrito = [];
   }
 
-  /**
-   * Confirma el pedido directamente (sin modal intermedio).
-   * Si el usuario no está logueado, lo redirige al login.
-   */
   confirmarPedido(): void {
     if (!this.puedeConfirmar || this.procesando) return;
 
@@ -135,7 +130,7 @@ export class Tienda implements OnInit {
       },
       error: () => {
         this.procesando = false;
-        this.error = 'No se pudo registrar el pedido. Verifica que JSON Server esté corriendo.';
+        this.error = 'No se pudo registrar el pedido.';
         this.cdr.markForCheck();
       },
     });

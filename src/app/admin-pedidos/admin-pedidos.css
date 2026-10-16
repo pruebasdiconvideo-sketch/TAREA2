@@ -79,7 +79,6 @@
   background-color: #faf5ef;
 }
 
-/* Bootstrap Icons via emoji fallback si no están cargados */
 .bi::before {
   display: inline-block;
   margin-right: 0.3em;

@@ -15,7 +15,6 @@
   object-fit: cover;
 }
 
-/* Chips de filtro */
 .chips {
   display: flex;
   gap: 0.5rem;
@@ -58,7 +57,6 @@
   color: #fff;
 }
 
-/* Card de producto hover */
 .card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }

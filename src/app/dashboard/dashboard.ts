@@ -23,14 +23,12 @@ export class Dashboard implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Redirección manual al Home si no hay sesión (rúbrica lo pide explícitamente)
     this.sesion = this.auth.obtenerSesion();
     if (!this.sesion) {
       this.router.navigate(['/']);
       return;
     }
 
-    // Cargar pedidos según rol
     if (this.auth.esAdministrador()) {
       this.pedidoService.getPedidos().subscribe({
         next: (data) => {
@@ -85,7 +83,6 @@ export class Dashboard implements OnInit {
   }
 
   get totalCompras(): number {
-    // Para clientes: total comprado (sin cancelados)
     return this.pedidos
       .filter((p) => p.estado !== 'cancelado')
       .reduce((acc, p) => acc + p.total, 0);

@@ -29,11 +29,6 @@ export class MisPedidos implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-    this.cargarPedidos();
-  }
-
-  private cargarPedidos(): void {
-    if (!this.sesion) return;
     this.pedidoService.getPedidosPorCliente(this.sesion.email).subscribe({
       next: (data) => {
         this.pedidos = data.sort(

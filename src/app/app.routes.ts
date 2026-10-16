@@ -22,7 +22,6 @@ export const routes: Routes = [
   { path: 'login', component: Login, title: 'Iniciar sesión' },
   { path: 'registro', component: Registro, title: 'Crear cuenta' },
   { path: 'dashboard', component: Dashboard, title: 'Dashboard' },
-  // Rutas protegidas según rol — el componente hace redirect si no corresponde
   { path: 'mis-pedidos', component: MisPedidos, title: 'Mis pedidos' },
   { path: 'admin/pedidos', component: AdminPedidos, title: 'Gestión de pedidos' },
   { path: '**', component: NotFound, title: 'Página no encontrada' },

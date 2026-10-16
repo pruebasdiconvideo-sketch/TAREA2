@@ -20,14 +20,6 @@ interface Usuario {
 const CLAVE_SESION = 'cafe_andino_sesion';
 const CLAVE_USUARIOS_NUEVOS = 'cafe_andino_usuarios_nuevos';
 
-/**
- * Servicio de autenticación con localStorage.
- * Estilo del profesor: métodos directos, sin signals.
- *
- * Los usuarios administrador y los clientes iniciales están predefinidos.
- * Los nuevos clientes que se registran se guardan en localStorage para
- * permitirles iniciar sesión después.
- */
 @Injectable({
   providedIn: 'root',
 })
@@ -36,7 +28,6 @@ export class AuthService {
   private sesionCambioSubject = new Subject<SesionUsuario | null>();
   readonly sesionCambio$ = this.sesionCambioSubject.asObservable();
 
-  // Usuarios predefinidos — los mismos del db.json.
   private readonly usuariosPredefinidos: Usuario[] = [
     { id: 1, nombre: 'Administrador', email: 'admin@cafeandino.pe', password: '1234', rol: 'administrador' },
     { id: 2, nombre: 'Lucía Quispe', email: 'cliente@cafeandino.pe', password: '1234', rol: 'cliente' },
@@ -47,10 +38,6 @@ export class AuthService {
     this.sesion = this.leerSesion();
   }
 
-  /**
-   * Valida credenciales contra los usuarios predefinidos y los nuevos
-   * registrados (guardados en localStorage). No requiere JSON Server.
-   */
   iniciarSesion(email: string, password: string): Observable<boolean> {
     const emailNormalizado = email.trim().toLowerCase();
     const usuarios = [...this.usuariosPredefinidos, ...this.leerUsuariosNuevos()];
@@ -62,10 +49,6 @@ export class AuthService {
     return of(true);
   }
 
-  /**
-   * Registra un nuevo cliente. Devuelve false si el email ya existe.
-   * El nuevo usuario se guarda en localStorage para futuros logins.
-   */
   registrarCliente(nombre: string, email: string, password: string): Observable<boolean> {
     const emailNormalizado = email.trim().toLowerCase();
     const usuarios = [...this.usuariosPredefinidos, ...this.leerUsuariosNuevos()];
@@ -123,8 +106,6 @@ export class AuthService {
       return null;
     }
   }
-
-  // ===== Usuarios nuevos registrados (persistidos en localStorage) =====
 
   private leerUsuariosNuevos(): Usuario[] {
     try {

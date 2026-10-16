@@ -10,7 +10,6 @@
   --borde-suave: rgba(42, 26, 15, 0.12);
   --radio: 14px;
 
-  /* Tipografía */
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
@@ -32,7 +31,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tipografía de títulos — estilo código base del profesor */
 h1,
 h2,
 h3,
@@ -64,7 +62,6 @@ small,
   font-family: var(--font-sans);
 }
 
-/* Mejoras de legibilidad en formularios */
 .form-label {
   font-weight: 500;
   color: var(--espresso);
@@ -83,7 +80,6 @@ main.container {
   min-height: 70vh;
 }
 
-/* MARCA */
 .bg-cafe {
   background-color: var(--cafe) !important;
 }
@@ -119,7 +115,6 @@ main.container {
   color: #fff;
 }
 
-/* FORMULARIOS: foco con color de marca */
 .btn:focus-visible,
 .form-control:focus,
 .form-select:focus,
@@ -128,7 +123,6 @@ main.container {
   border-color: var(--latte);
 }
 
-/* CARDS */
 .card {
   border: 0;
   border-radius: var(--radio);
@@ -140,7 +134,6 @@ main.container {
   font-weight: 600;
 }
 
-/* SECCIONES */
 .titulo-seccion {
   font-family: var(--font-serif);
   font-size: 1.9rem;
@@ -150,7 +143,6 @@ main.container {
   color: var(--espresso);
 }
 
-/* TABLAS */
 .table > :not(caption) > * > * {
   border-color: var(--borde-suave);
 }
@@ -168,7 +160,6 @@ main.container {
   color: var(--espresso);
 }
 
-/* MÓVIL */
 @media (max-width: 575.98px) {
   .container {
     --bs-gutter-x: 1rem;

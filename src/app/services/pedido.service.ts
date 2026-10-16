@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 export type EstadoPedido = 'pendiente' | 'preparando' | 'entregado' | 'cancelado';
 
@@ -25,24 +25,12 @@ export interface Pedido {
 
 const CLAVE_PEDIDOS = 'cafe_andino_pedidos';
 
-/**
- * Servicio para gestionar pedidos.
- * Estilo del profesor: constructor con HttpClient, métodos directos.
- *
- * ESTE es el único servicio que usa JSON Server (es lo que pide la rúbrica:
- * base de datos simulada para los pedidos y sus cambios de estado).
- *
- * Si JSON Server no responde (red, deploy en Netlify), hace fallback a
- * localStorage para que la app nunca quede inservible.
- */
 @Injectable({
   providedIn: 'root',
 })
 export class PedidoService {
   private apiUrl = 'http://localhost:3000/pedidos';
 
-  // Pedidos iniciales de ejemplo (mismos que en db.json).
-  // Se usan como fallback en localStorage si JSON Server no responde.
   private readonly pedidosIniciales: Pedido[] = [
     {
       id: 1,
@@ -118,29 +106,18 @@ export class PedidoService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Obtiene todos los pedidos desde JSON Server.
-   * Si falla, usa localStorage.
-   */
   getPedidos(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(this.apiUrl).pipe(
       catchError(() => of(this.leerPedidosLocales())),
     );
   }
 
-  /**
-   * Obtiene los pedidos de un cliente filtrando por email.
-   */
   getPedidosPorCliente(email: string): Observable<Pedido[]> {
     return this.http
       .get<Pedido[]>(`${this.apiUrl}?email=${encodeURIComponent(email)}`)
       .pipe(catchError(() => of(this.leerPedidosLocales().filter((p) => p.email === email))));
   }
 
-  /**
-   * Crea un nuevo pedido en JSON Server.
-   * Si falla, lo guarda en localStorage.
-   */
   crearPedido(pedido: Omit<Pedido, 'id'>): Observable<Pedido> {
     return this.http.post<Pedido>(this.apiUrl, pedido).pipe(
       catchError(() => {
@@ -151,10 +128,6 @@ export class PedidoService {
     );
   }
 
-  /**
-   * Actualiza el estado de un pedido en JSON Server.
-   * Si falla, lo actualiza en localStorage.
-   */
   actualizarEstado(id: number, estado: EstadoPedido): Observable<Pedido> {
     return this.http.patch<Pedido>(`${this.apiUrl}/${id}`, { estado }).pipe(
       catchError(() => {
@@ -165,14 +138,11 @@ export class PedidoService {
     );
   }
 
-  // ===== Métodos auxiliares para el fallback en localStorage =====
-
   private leerPedidosLocales(): Pedido[] {
     try {
       const guardados = localStorage.getItem(CLAVE_PEDIDOS);
       if (guardados) return JSON.parse(guardados) as Pedido[];
     } catch {}
-    // Si no hay pedidos guardados, iniciar con los de ejemplo
     this.guardarPedidosLocales(this.pedidosIniciales);
     return this.pedidosIniciales;
   }

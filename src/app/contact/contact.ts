@@ -17,7 +17,6 @@ export class Contact {
   enviar(): void {
     if (this.nombre && this.email && this.mensaje) {
       this.enviado = true;
-      // Limpiar formulario
       this.nombre = '';
       this.email = '';
       this.mensaje = '';

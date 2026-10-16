@@ -45,8 +45,6 @@ export class Login {
         }
       },
       error: () => {
-        // No debería llegar aquí nunca porque el AuthService tiene fallback,
-        // pero por si acaso mostramos un mensaje claro.
         this.cargando = false;
         this.error = 'Correo o contraseña incorrectos. Verifica tus datos.';
         this.cdr.markForCheck();

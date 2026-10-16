@@ -1,5 +1,4 @@
 <div class="admin-pedidos">
-  <!-- Acceso denegado -->
   <div class="alert alert-danger text-center" *ngIf="accesoDenegado">
     <i class="bi bi-shield-lock" style="font-size: 3rem;"></i>
     <h4 class="alert-heading mt-2">Acceso denegado</h4>
@@ -18,7 +17,6 @@
     </button>
   </div>
 
-  <!-- KPIs por estado -->
   <div class="row g-3 mb-4" *ngIf="!cargando && !error">
     <div class="col-6 col-md-3">
       <div class="card kpi-card border-warning">
@@ -74,7 +72,6 @@
     </div>
   </div>
 
-  <!-- Filtros -->
   <div class="row g-2 mb-3" *ngIf="!cargando && !error">
     <div class="col-12 col-md-6">
       <input type="search" class="form-control" placeholder="Buscar por cliente, email o #pedido..."
@@ -88,16 +85,13 @@
     </div>
   </div>
 
-  <!-- Estado de carga -->
   <div class="text-center py-5" *ngIf="cargando">
     <div class="spinner-border text-cafe"></div>
     <p class="text-muted mt-2">Cargando pedidos...</p>
   </div>
 
-  <!-- Error -->
   <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
 
-  <!-- Tabla de pedidos -->
   <div class="card shadow-sm" *ngIf="!cargando && !error && pedidosFiltrados.length > 0">
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0">
@@ -134,13 +128,11 @@
               </button>
             </td>
           </tr>
-          <!-- Fila expandible con detalle del pedido -->
           <tr *ngIf="false"></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Detalle del pedido seleccionado -->
     <div class="card border-0 border-top" *ngIf="pedidoExpandido">
       <div class="card-body" *ngFor="let p of pedidosFiltrados">
         <ng-container *ngIf="p.id === pedidoExpandido">
@@ -182,7 +174,6 @@
     </div>
   </div>
 
-  <!-- Sin resultados -->
   <div class="alert alert-info text-center" *ngIf="!cargando && !error && pedidosFiltrados.length === 0">
     No hay pedidos que coincidan con el filtro.
   </div>
