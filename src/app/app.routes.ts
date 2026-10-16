@@ -6,6 +6,7 @@ import { Tienda } from './tienda/tienda';
 import { Contact } from './contact/contact';
 import { MiCuenta } from './mi-cuenta/mi-cuenta';
 import { Login } from './login/login';
+import { Registro } from './registro/registro';
 import { Dashboard } from './dashboard/dashboard';
 import { NotFound } from './not-found/not-found';
 import { AdminPedidos } from './admin-pedidos/admin-pedidos';
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'contacto', component: Contact, title: 'Contacto' },
   { path: 'mi-cuenta', component: MiCuenta, title: 'Mi Cuenta' },
   { path: 'login', component: Login, title: 'Iniciar sesión' },
+  { path: 'registro', component: Registro, title: 'Crear cuenta' },
   { path: 'dashboard', component: Dashboard, title: 'Dashboard' },
   // Rutas protegidas según rol — el componente hace redirect si no corresponde
   { path: 'mis-pedidos', component: MisPedidos, title: 'Mis pedidos' },

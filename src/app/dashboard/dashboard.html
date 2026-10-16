@@ -111,7 +111,9 @@
     <div class="col-md-6" *ngIf="esAdmin()">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h5 class="text-cafe">⚙ Gestión de pedidos</h5>
+          <h5 class="text-cafe">
+            <i class="bi bi-gear-fill me-2"></i>Gestión de pedidos
+          </h5>
           <p class="text-muted small">Administra y cambia el estado de los pedidos de todos los clientes.</p>
           <a class="btn btn-cafe btn-sm" routerLink="/admin/pedidos">Ir a gestión</a>
         </div>
@@ -120,7 +122,9 @@
     <div class="col-md-6" *ngIf="!esAdmin()">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h5 class="text-cafe">🛍 Mis pedidos</h5>
+          <h5 class="text-cafe">
+            <i class="bi bi-bag-check me-2"></i>Mis pedidos
+          </h5>
           <p class="text-muted small">Revisa el estado de tus pedidos realizados.</p>
           <a class="btn btn-cafe btn-sm" routerLink="/mis-pedidos">Ver mis pedidos</a>
         </div>
@@ -129,7 +133,9 @@
     <div class="col-md-6">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h5 class="text-cafe">☕ Hacer pedido</h5>
+          <h5 class="text-cafe">
+            <i class="bi bi-cup-hot me-2"></i>Hacer pedido
+          </h5>
           <p class="text-muted small">Explora el catálogo y arma tu carrito de compras.</p>
           <a class="btn btn-outline-cafe btn-sm" routerLink="/tienda">Ir a la tienda</a>
         </div>

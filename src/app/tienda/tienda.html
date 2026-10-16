@@ -9,11 +9,13 @@
 <!-- MENSAJE DE CONFIRMACIÓN (reemplaza toda la tienda cuando se confirma) -->
 <div class="card shadow-sm" *ngIf="pedidoConfirmado; else vistaTienda">
   <div class="card-body text-center p-5">
-    <div class="text-success mb-3" style="font-size: 4rem;">✓</div>
+    <i class="bi bi-check-circle-fill text-success mb-3" style="font-size: 4rem;"></i>
     <h3 class="text-cafe">¡Pedido confirmado!</h3>
     <p class="text-muted">Tu pedido fue registrado con estado <strong>Pendiente</strong>.
     Te avisaremos cuando comience la preparación.</p>
-    <button class="btn btn-cafe mt-2" (click)="cerrarConfirmacion()">Ver mis pedidos</button>
+    <button class="btn btn-cafe mt-2" (click)="cerrarConfirmacion()">
+      <i class="bi bi-bag-check me-1"></i>Ver mis pedidos
+    </button>
   </div>
 </div>
 

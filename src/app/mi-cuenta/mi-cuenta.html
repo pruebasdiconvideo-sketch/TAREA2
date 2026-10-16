@@ -10,9 +10,13 @@
     <p><strong>Rol:</strong> {{ sesion.rol | titlecase }}</p>
     <p><strong>Fecha de ingreso:</strong> {{ sesion.fechaIngreso | date: 'dd/MM/yyyy HH:mm' }}</p>
 
-    <div class="d-flex gap-2 mt-3">
-      <button class="btn btn-cafe" (click)="irAlDashboard()">Ir al Dashboard</button>
-      <button class="btn btn-outline-danger" (click)="cerrarSesion()">Cerrar sesión</button>
+    <div class="d-flex gap-2 mt-3 flex-wrap">
+      <button class="btn btn-cafe" (click)="irAlDashboard()">
+        <i class="bi bi-speedometer2 me-1"></i>Ir al Dashboard
+      </button>
+      <button class="btn btn-outline-danger" (click)="cerrarSesion()">
+        <i class="bi bi-box-arrow-right me-1"></i>Cerrar sesión
+      </button>
     </div>
   </div>
 </div>

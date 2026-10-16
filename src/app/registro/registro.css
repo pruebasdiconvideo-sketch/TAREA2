@@ -1,0 +1,26 @@
+.bg-cafe {
+  background-color: #6f4e37 !important;
+}
+
+.text-cafe {
+  color: #6f4e37 !important;
+}
+
+.btn-cafe {
+  background: #6f4e37;
+  border-color: #6f4e37;
+  color: #fff;
+}
+
+.btn-cafe:hover,
+.btn-cafe:focus {
+  background: #2a1a0f;
+  border-color: #2a1a0f;
+  color: #fff;
+}
+
+.auth-card {
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}

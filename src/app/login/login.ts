@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, RouterLink],
   selector: 'app-login',
   styleUrl: './login.css',
   templateUrl: './login.html',

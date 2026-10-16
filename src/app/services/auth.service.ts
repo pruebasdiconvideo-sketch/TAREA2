@@ -18,13 +18,15 @@ interface Usuario {
 }
 
 const CLAVE_SESION = 'cafe_andino_sesion';
+const CLAVE_USUARIOS_NUEVOS = 'cafe_andino_usuarios_nuevos';
 
 /**
  * Servicio de autenticación con localStorage.
  * Estilo del profesor: métodos directos, sin signals.
  *
- * Los usuarios están predefinidos localmente (no requiere JSON Server).
- * JSON Server solo se usa para pedidos (no para login).
+ * Los usuarios administrador y los clientes iniciales están predefinidos.
+ * Los nuevos clientes que se registran se guardan en localStorage para
+ * permitirles iniciar sesión después.
  */
 @Injectable({
   providedIn: 'root',
@@ -34,8 +36,8 @@ export class AuthService {
   private sesionCambioSubject = new Subject<SesionUsuario | null>();
   readonly sesionCambio$ = this.sesionCambioSubject.asObservable();
 
-  // Usuarios predefinidos — los mismos 3 del db.json.
-  private readonly usuarios: Usuario[] = [
+  // Usuarios predefinidos — los mismos del db.json.
+  private readonly usuariosPredefinidos: Usuario[] = [
     { id: 1, nombre: 'Administrador', email: 'admin@cafeandino.pe', password: '1234', rol: 'administrador' },
     { id: 2, nombre: 'Lucía Quispe', email: 'cliente@cafeandino.pe', password: '1234', rol: 'cliente' },
     { id: 3, nombre: 'Carlos Mamani', email: 'carlos@ejemplo.com', password: '1234', rol: 'cliente' },
@@ -46,16 +48,39 @@ export class AuthService {
   }
 
   /**
-   * Valida credenciales contra los usuarios predefinidos.
-   * No requiere JSON Server.
+   * Valida credenciales contra los usuarios predefinidos y los nuevos
+   * registrados (guardados en localStorage). No requiere JSON Server.
    */
   iniciarSesion(email: string, password: string): Observable<boolean> {
     const emailNormalizado = email.trim().toLowerCase();
-    const usuario = this.usuarios.find(
+    const usuarios = [...this.usuariosPredefinidos, ...this.leerUsuariosNuevos()];
+    const usuario = usuarios.find(
       (u) => u.email.toLowerCase() === emailNormalizado && u.password === password,
     );
     if (!usuario) return of(false);
     this.guardarSesion(usuario);
+    return of(true);
+  }
+
+  /**
+   * Registra un nuevo cliente. Devuelve false si el email ya existe.
+   * El nuevo usuario se guarda en localStorage para futuros logins.
+   */
+  registrarCliente(nombre: string, email: string, password: string): Observable<boolean> {
+    const emailNormalizado = email.trim().toLowerCase();
+    const usuarios = [...this.usuariosPredefinidos, ...this.leerUsuariosNuevos()];
+    if (usuarios.some((u) => u.email.toLowerCase() === emailNormalizado)) {
+      return of(false);
+    }
+    const nuevo: Usuario = {
+      id: Date.now(),
+      nombre: nombre.trim(),
+      email: emailNormalizado,
+      password,
+      rol: 'cliente',
+    };
+    this.guardarUsuarioNuevo(nuevo);
+    this.guardarSesion(nuevo);
     return of(true);
   }
 
@@ -97,5 +122,22 @@ export class AuthService {
     } catch {
       return null;
     }
+  }
+
+  // ===== Usuarios nuevos registrados (persistidos en localStorage) =====
+
+  private leerUsuariosNuevos(): Usuario[] {
+    try {
+      const guardados = localStorage.getItem(CLAVE_USUARIOS_NUEVOS);
+      return guardados ? (JSON.parse(guardados) as Usuario[]) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  private guardarUsuarioNuevo(usuario: Usuario): void {
+    const usuarios = this.leerUsuariosNuevos();
+    usuarios.push(usuario);
+    localStorage.setItem(CLAVE_USUARIOS_NUEVOS, JSON.stringify(usuarios));
   }
 }
